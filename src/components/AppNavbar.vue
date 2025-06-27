@@ -47,10 +47,14 @@ export default {
 #nav {
   display: flex;
   gap: 10px;
-  background: #f5f5f5;
+  background: #f5f5f7;
   padding: 10px;
   justify-content: space-between;
   margin: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: var(--shadow);
 }
 .first_part {
   display: flex;

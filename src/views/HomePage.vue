@@ -8,7 +8,6 @@ import ProductPage from "@/components/ProductPage.vue";
 
 export default {
   name: "HomePage",
-
   components: {
     ProductPage,
   },
