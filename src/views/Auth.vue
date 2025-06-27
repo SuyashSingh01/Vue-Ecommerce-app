@@ -59,6 +59,7 @@ export default {
   name: "AuthForm",
   data() {
     return {
+      isLogin: JSON.parse(localStorage.getItem("userData")) ? true : false,
       submitted: false,
       form: {
         name: "",
@@ -81,20 +82,20 @@ export default {
       this.submittedData = { ...this.form };
 
       if (this.isLogin) {
-        const savedData = JSON.parse(localStorage.getItem("userData"));
-        if (
-          savedData &&
-          savedData.email === this.form.email &&
-          savedData.password === this.form.password
-        ) {
-          console.log("Login successful");
-          this.$router.push("/user-profile");
-        } else {
-          alert("Invalid credentials. Try again!");
-        }
+        this.$store.dispatch("auth/login", {
+          email: this.form.email,
+          password: this.form.password,
+        });
+        console.log("Login successful");
+        alert("Login successful!");
+        this.$router.push({ name: "user-profile" });
       } else {
         console.log("Registration successful");
-        localStorage.setItem("userData", JSON.stringify(this.submittedData));
+        this.$store.dispatch("auth/register", {
+          name: this.form.name,
+          email: this.form.email,
+          password: this.form.password,
+        });
         this.isLogin = true;
         alert("Registration successful! Please log in.");
       }
@@ -105,7 +106,7 @@ export default {
     },
   },
   mounted() {
-    const userData = localStorage.getItem("userData");
+    const userData = this.$store.getters["auth/user"];
     console.log("User Data in mounting phase:", userData);
     if (userData) {
       this.$router.push({ name: "user-profile" });

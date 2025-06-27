@@ -36,8 +36,6 @@ export default {
     },
   },
   computed: {
-    // console.log(this.$router.currentRoute)
-
     currentRoute() {
       return this.$router.currentRoute._value.path;
     },

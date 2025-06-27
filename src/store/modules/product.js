@@ -1,5 +1,3 @@
-import { request } from "@/services/request";
-
 export default {
   namespaced: true,
 
@@ -10,26 +8,9 @@ export default {
   mutations: {
     setProducts(state, products) {
       state.products = products;
+      console.log("Products set in Vuex:", products);
     },
   },
-
-  actions: {
-    async fetchProducts({ commit }) {
-      try {
-        const response = await request(
-          "GET",
-          "https://fakestoreapi.com/products"
-        );
-        const products = response.data;
-        console.log("Fetched products:", products);
-        commit("setProducts", products);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-        throw error;
-      }
-    },
-  },
-
   getters: {
     products: (state) => state.products,
 
