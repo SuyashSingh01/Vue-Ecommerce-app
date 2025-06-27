@@ -76,6 +76,31 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 3%;
+}
+.search-bar {
+  display: flex;
+  width: 60%;
+  gap: 10px;
+}
+.search-bar input {
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+}
+.search-bar button {
+  padding: 5px 10px;
+  font-size: 16px;
+}
+.category-select {
+  padding: 5px;
+  font-size: 16px;
+}
 .product_page {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
