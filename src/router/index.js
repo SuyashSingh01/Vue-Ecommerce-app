@@ -2,9 +2,6 @@ import { createWebHistory, createRouter } from "vue-router";
 
 import Home from "../views/HomePage.vue";
 import Auth from "../views/Auth.vue";
-import About from "../views/AboutPage.vue";
-import UserProfile from "../views/UserProfile.vue";
-import ContactPage from "../views/ContactPage.vue";
 
 const routes = [
   {
@@ -19,12 +16,12 @@ const routes = [
   },
   {
     path: "/about",
-    component: About,
+    component: () => import("../views/AboutPage.vue"),
     name: "about",
   },
   {
     path: "/user-profile",
-    component: UserProfile,
+    component: () => import("../views/UserProfile.vue"),
     name: "user-profile",
   },
   {
@@ -34,7 +31,7 @@ const routes = [
   },
   {
     path: "/contact",
-    component: ContactPage,
+    component: () => import("../views/ContactPage.vue"),
     name: "contact",
   },
   {

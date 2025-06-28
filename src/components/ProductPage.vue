@@ -1,4 +1,5 @@
 <template>
+  <div v-if="isLoading"></div>
   <div class="header">
     <div class="search-bar">
       <input
@@ -6,16 +7,12 @@
         placeholder="Search for products..."
         v-model="searchTerm"
       />
-      <button @click="resetSearch">Reset</button>
+      <button class="btn btn-primary" @click="resetSearch">Reset</button>
     </div>
 
     <select v-model="selectedCategory" class="category-select">
       <option value="">All Categories</option>
-      <option
-        v-for="category in $store.getters['product/categories']"
-        :value="category"
-        :key="category"
-      >
+      <option v-for="category in categories" :value="category" :key="category">
         {{ category }}
       </option>
     </select>
@@ -36,43 +33,39 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, watch } from "vue";
+import { useStore } from "vuex";
 import ProductCard from "./ProductCard.vue";
 
-export default {
-  name: "ProductPage",
+import { useGetAllProduct } from "@/hooks/useGetAllProduct";
 
-  data() {
-    return {
-      searchTerm: "",
-      selectedCategory: "",
-    };
-  },
+const { data, isLoading } = useGetAllProduct();
 
-  async mounted() {
-    await this.$store.dispatch("product/fetchProducts");
-  },
+watch(data, (products) => {
+  if (products) {
+    console.log("Products fetched successfully in page", products.data);
+    store.commit("product/setProducts", products.data);
+  }
+});
+const store = useStore();
 
-  computed: {
-    filteredProducts() {
-      return this.$store.getters["product/getFilteredProducts"]({
-        searchTerm: this.searchTerm,
-        category: this.selectedCategory,
-      });
-    },
-  },
+const searchTerm = ref("");
+const selectedCategory = ref("");
 
-  methods: {
-    resetSearch() {
-      this.searchTerm = "";
-      this.selectedCategory = "";
-    },
-  },
+const categories = computed(() => store.getters["product/categories"]);
 
-  components: {
-    ProductCard,
-  },
-};
+const filteredProducts = computed(() =>
+  store.getters["product/getFilteredProducts"]({
+    searchTerm: searchTerm.value,
+    category: selectedCategory.value,
+  })
+);
+
+function resetSearch() {
+  searchTerm.value = "";
+  selectedCategory.value = "";
+}
 </script>
 
 <style scoped>
@@ -88,6 +81,7 @@ export default {
   width: 60%;
   gap: 10px;
 }
+
 .search-bar input {
   width: 100%;
   padding: 5px;

@@ -21,24 +21,14 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { computed } from "vue";
 import ProductCard from "@/components/ProductCard.vue";
-import { mapState } from "vuex";
+import { useStore } from "vuex";
 
-export default {
-  name: "CartPage",
-
-  computed: {
-    ...mapState("cart", ["items"]),
-    cartProducts() {
-      return this.items;
-    },
-  },
-
-  components: {
-    ProductCard,
-  },
-};
+const store = useStore();
+const cartProducts = computed(() => store.getters["cart/CartProducts"]);
+console.log("Cart Products:", cartProducts.value);
 </script>
 
 <style scoped>

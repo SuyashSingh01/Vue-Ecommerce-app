@@ -10,7 +10,20 @@ export default {
   mutations: {
     setUser(state, user) {
       state.user = user;
-      state.isLogin = !!user;
+      localStorage.setItem("userData", JSON.stringify(user));
+    },
+    setIsLogin(state, user) {
+      const savedData = JSON.parse(localStorage.getItem("userData"));
+      if (
+        savedData &&
+        savedData.email === user.email &&
+        savedData.password === user.password
+      ) {
+        console.log("Login successful");
+        state.isLogin = true;
+      } else {
+        alert("Invalid credentials. Try again!");
+      }
     },
     logout(state) {
       console.log("Logging out...");
@@ -21,10 +34,13 @@ export default {
   },
   actions: {
     login({ commit }, userData) {
-      localStorage.setItem("userData", JSON.stringify(userData));
+      commit("setIsLogin", userData);
+    },
+    register({ commit }, userData) {
       commit("setUser", userData);
     },
     logout({ commit }) {
+      console.log("Logging out from Vuex...");
       commit("logout");
     },
   },

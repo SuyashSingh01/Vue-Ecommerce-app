@@ -10,16 +10,20 @@
       <p class="product-category">{{ product.category }}</p>
 
       <h3 class="product-title">{{ product.title }}</h3>
-      <div class="product-price">${{ product.price.toFixed(2) }}</div>
+      <div class="product-price">${{ product.price?.toFixed(2) }}</div>
     </div>
     <div class="product-card-btn">
       <button class="btn btn-primary" @click="addToCart">
         {{ currentRoute !== "/cart" ? "Add to Cart" : "+" }}
       </button>
-      <button v-if="`${currentRoute === '/cart'}`" @click="removeItem">
+      <button
+        class="btn btn-primary"
+        v-if="currentRoute === '/cart'"
+        @click="removeItem"
+      >
         -
       </button>
-      <button v-else class="btn btn-secondary" @click="viewDetails">
+      <button class="btn btn-secondary" @click="viewDetails">
         View Details
       </button>
     </div>
@@ -36,20 +40,17 @@ export default {
     },
   },
   computed: {
-    // console.log(this.$router.currentRoute)
-
     currentRoute() {
       return this.$router.currentRoute._value.path;
     },
   },
+
   methods: {
     addToCart() {
       this.$store.commit("cart/addToCart", this.product);
-      console.log(this.$router.currentRoute?._value.href);
     },
     removeItem() {
       this.$store.commit("cart/removeFromCart", this.product.id);
-      console.log("Removed item from cart:", this.product.id);
     },
     viewDetails() {
       this.$router.push({
