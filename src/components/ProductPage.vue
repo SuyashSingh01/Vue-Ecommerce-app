@@ -7,7 +7,7 @@
         placeholder="Search for products..."
         v-model="searchTerm"
       />
-      <button @click="resetSearch">Reset</button>
+      <button class="btn btn-primary" @click="resetSearch">Reset</button>
     </div>
 
     <select v-model="selectedCategory" class="category-select">

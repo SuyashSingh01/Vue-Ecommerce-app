@@ -5,10 +5,16 @@
     <img :src="product.image" alt="Product Image" class="product__img" />
     <p class="product-price">${{ product.price?.toFixed(2) }}</p>
     <p class="product-description">{{ product.description }}</p>
-    <button class="btn btn-primary" @click="AddCart">Add to Cart</button>
-    <button class="btn btn-secondary" @click="$router.push({ name: 'cart' })">
-      View Cart
-    </button>
+    <div class="product-actions">
+      <button v-if="!isadded.value" class="btn btn-primary" @click="AddCart()">
+        Add to Cart
+      </button>
+      <button v-else class="btn btn-secondary" disabled>Already in Cart</button>
+      <button class="btn btn-secondary" @click="$router.push('/cart')">
+        Go to Cart
+      </button>
+      <button class="btn btn-primary" @click="$router.go(-1)">Go Back</button>
+    </div>
   </div>
   <div v-if="!product" class="text-center">Product not found</div>
 </template>
@@ -24,15 +30,21 @@ const product = ref({});
 
 const productId = parseInt(route.params.id);
 console.log("Product ID:", productId);
+const isadded = ref(store.getters["cart/isProductInCart"](productId));
+
+if (isadded.value) {
+  console.log("Product is already in the cart");
+} else {
+  console.log("Product is not in the cart");
+}
 
 const AddCart = () => {
-  store.commit("cart/addToCart", product);
-  console.log("Product added to cart:", product);
+  store.commit("cart/addToCart", product.value);
 };
 
 onMounted(() => {
   const products = store.state.product.products.find((p) => p.id === productId);
-  console.log("Product on Mounting Phase:", products);
+
   if (products) {
     product.value = products;
   } else {
@@ -69,5 +81,10 @@ onMounted(() => {
   font-size: 1rem;
   color: #666;
   margin-bottom: 20px;
+}
+.product-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 </style>

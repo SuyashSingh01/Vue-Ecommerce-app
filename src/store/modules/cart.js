@@ -24,6 +24,10 @@ export default {
       }
       localStorage.setItem("cartItems", JSON.stringify(state.items));
     },
+    clearCart(state) {
+      state.items = [];
+      localStorage.removeItem("cartItems");
+    },
   },
 
   getters: {
@@ -33,5 +37,9 @@ export default {
         (total, item) => total + item.price * item.quantity,
         0
       ),
+    CartProducts: (state) => state.items,
+    isProductInCart: (state) => (productId) => {
+      return state.items.some((item) => item.id === productId);
+    },
   },
 };
