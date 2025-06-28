@@ -1,6 +1,6 @@
 # Vue Ecommerce Project
 
-A modern Ecommerce web application built with Vue 3, Vuex, and Vue Router. This project demonstrates core ecommerce features such as product listing, search, category filtering, cart management, authentication, and navigation.
+A modern Ecommerce web application built with Vue 3, Vuex, Vue Router, and Tanstack Query. This project demonstrates core ecommerce features such as product listing, search, category filtering, cart management, authentication, navigation, and efficient server state management with caching.
 
 ---
 
@@ -11,6 +11,9 @@ A modern Ecommerce web application built with Vue 3, Vuex, and Vue Router. This 
 
 - **Vuex Store Usage:**  
   Centralized state management for products, cart, authentication, and loading states.
+
+- **Tanstack Query Integration:**  
+  Efficient caching and server state management for API data using Tanstack Query.
 
 - **Authentication (LocalStorage):**  
   Simple registration and login system using LocalStorage to persist user data and login state.
@@ -64,7 +67,7 @@ src/
 1. **Clone the repository:**
 
    ```
-   git clone  https://github.com/SuyashSingh01/Vue-Ecommerce-app.git
+   git clone https://github.com/SuyashSingh01/Vue-Ecommerce-app.git
    cd Vue-Ecommerce-Project/app
    ```
 
@@ -100,7 +103,7 @@ src/
 ## Functionality Overview
 
 - **Product Listing:**  
-  Products are fetched from [Fake Store API](https://fakestoreapi.com/products) and displayed on the Home page.
+  Products are fetched from [Fake Store API](https://fakestoreapi.com/products) and displayed on the Home page. Tanstack Query is used for caching and managing server state.
 
 - **Search & Filter:**  
   Use the search bar to filter products by name or description. Use the category dropdown to filter by category.
@@ -141,4 +144,4 @@ This project is for educational purposes.
 
 ---
 
-\*\*Enjoy building and customizing your Vue
+**Enjoy building and customizing your Vue Ecommerce Project!**
