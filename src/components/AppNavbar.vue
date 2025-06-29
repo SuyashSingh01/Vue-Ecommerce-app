@@ -44,7 +44,6 @@ const user = computed(() => store.getters["auth/user"]);
 const isLogin = computed(() => store.getters["auth/isLogin"]);
 
 const logouthandler = () => {
-  console.log("Logging out...");
   store.dispatch("auth/logout");
   console.log("User logged out successfully");
 

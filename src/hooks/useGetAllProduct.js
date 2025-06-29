@@ -16,5 +16,9 @@ export const useGetAllProduct = () => {
     staleTime: 1000 * 60 * 2,
     cacheTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
+    onError: (error) => {
+      console.error("Error fetching products:", error);
+      alert("Failed to fetch products. Please try again later.");
+    },
   });
 };
