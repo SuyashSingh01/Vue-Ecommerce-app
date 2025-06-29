@@ -37,7 +37,6 @@
 import { ref, computed, watch } from "vue";
 import { useStore } from "vuex";
 import ProductCard from "./ProductCard.vue";
-
 import { useGetAllProduct } from "@/hooks/useGetAllProduct";
 
 const { data, isLoading } = useGetAllProduct();

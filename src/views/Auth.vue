@@ -87,7 +87,6 @@ export default {
           password: this.form.password,
         });
         console.log("Login successful");
-        alert("Login successful!");
         this.$router.push({ name: "user-profile" });
       } else {
         console.log("Registration successful");

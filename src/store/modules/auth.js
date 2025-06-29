@@ -21,6 +21,7 @@ export default {
       ) {
         console.log("Login successful");
         state.isLogin = true;
+        alert("Login successful!");
       } else {
         alert("Invalid credentials. Try again!");
       }

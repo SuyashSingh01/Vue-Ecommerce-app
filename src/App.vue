@@ -5,15 +5,8 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import AppNavbar from "./components/AppNavbar.vue";
-
-export default {
-  name: "App",
-  components: {
-    AppNavbar,
-  },
-};
 </script>
 
 <style>

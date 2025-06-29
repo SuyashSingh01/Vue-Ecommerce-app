@@ -31,6 +31,7 @@
 </template>
 
 <script>
+// option api
 export default {
   name: "ProductCard",
   props: {
