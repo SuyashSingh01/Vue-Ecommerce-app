@@ -36,6 +36,38 @@ A modern Ecommerce web application built with Vue 3, Vuex, Vue Router, and Tanst
 - **404 Not Found:**  
   Friendly error page for unknown routes.
 
+  ## Hosting
+
+  The Vue Ecommerce Project is hosted on an AWS EC2 instance and accessible at [http://suyashsingh.me/](http://suyashsingh.me/).
+
+  ### Deployment Steps
+
+  1. **Build the Project:**
+
+  ```
+  npm run build
+  ```
+
+  or
+
+  ```
+  yarn build
+  ```
+
+  2. **Upload Build Files:**
+     Transfer the contents of the `dist/` directory to your AWS EC2 instance using `scp` or any file transfer tool.
+
+  3. **Install a Web Server:**
+     On your EC2 instance, install and configure a web server such as Nginx or Apache to serve the static files.
+
+  4. **Configure Domain:**
+     Point your domain (`suyashsingh.me`) to the EC2 instance's public IP using your DNS provider.
+
+  5. **Access the App:**
+     Visit [http://suyashsingh.me/](http://suyashsingh.me/) to view the live application.
+
+  ***
+
 ---
 
 ## Project Structure
