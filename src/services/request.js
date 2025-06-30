@@ -9,6 +9,12 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     NProgress.start();
+    // currently not using token
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    console.log("Request made with ", config);
     return config;
   },
   (error) => {
