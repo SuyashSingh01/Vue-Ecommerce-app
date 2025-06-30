@@ -17,6 +17,7 @@
       <p>Total Items: {{ $store.getters["cart/totalItems"] }}</p>
       <p>Total: {{ $store.getters["cart/totalPrice"] }}</p>
       <button class="btn btn-primary">Checkout</button>
+      <button class="btn btn-secondary" @click="clearCart">Clear Cart</button>
     </div>
   </div>
 </template>
@@ -29,6 +30,11 @@ import { useStore } from "vuex";
 const store = useStore();
 const cartProducts = computed(() => store.getters["cart/CartProducts"]);
 console.log("Cart Products:", cartProducts.value);
+
+const clearCart = () => {
+  store.dispatch("cart/clearCart");
+  console.log("Cart cleared successfully");
+};
 </script>
 
 <style scoped>
